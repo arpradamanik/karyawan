@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('karyawan_nomor');
             $table->string('karyawan_tanggal');
             $table->string('karyawan_masa');
+            $table->string('foto');
             $table->integer('karyawan_status')->default(1);
             $table->timestamps();
         });

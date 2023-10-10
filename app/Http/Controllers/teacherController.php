@@ -59,10 +59,11 @@ class teacherController extends Controller
                 'karyawan_nomor' => 'required',
                 'karyawan_tanggal' => 'required',
                 'karyawan_masa' => 'required',
+                'foto' => 'required|file|mimes:jpeg,png,jpg|max:2048',
             ]
         );
 
-
+        $foto = $request->file('foto')->store('image', 'public');
 
         $karyawan = new teacher;
         $karyawan->karyawan_name = $request['karyawan_name'];
@@ -71,6 +72,7 @@ class teacherController extends Controller
         $karyawan->karyawan_nomor = $request['karyawan_nomor'];
         $karyawan->karyawan_tanggal = $request['karyawan_tanggal'];
         $karyawan->karyawan_masa = $request['karyawan_masa'];
+        $karyawan->foto = $foto;
         $karyawan->save();
         return redirect('/teacher/view');
     }
@@ -109,6 +111,10 @@ class teacherController extends Controller
     public function update(Request $request, $id)
     {
         $karyawan = Teacher::find($id);
+        if($request->hasFile('foto')){
+            $foto = $request->file('foto')->store('image', 'public');
+            $karyawan->foto = $foto;
+        }
         $karyawan->karyawan_name = $request['karyawan_name'];
         $karyawan->karyawan_kebun = $request['karyawan_kebun'];
         $karyawan->karyawan_jenis = $request['karyawan_jenis'];
