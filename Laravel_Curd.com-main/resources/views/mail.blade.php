@@ -1,0 +1,1 @@
+<h1>Please click here and activatio your account</h1>
